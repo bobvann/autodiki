@@ -56,7 +56,23 @@ export class AppComponent implements OnInit {
 
   }
 
+  validate(): boolean {
+    for(let f of Object.keys(this.userData)){
+      if (!this.userData[f]) {
+        console.log("invalid: ", f);
+        alert('Attenzione! Tutti i campi sono obbligatori');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   generate() {
+
+    if (!this.validate()) {
+      return;
+    }
 
     if (this.saveToStorage) {
       localStorage.setItem(this.KEY_STORAGE, JSON.stringify(this.userData));
