@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="py-5 text-center">
+    <!--<img class="d-block mx-auto mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">-->
+    <h2>AutoDiki.it</h2>
+    <p class="lead">
+      Compila i campi seguenti per generare la tua autodichiarazione per poter circolare!
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h4 class="mb-3">I tuoi dati anagrafici</h4>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="firstName">Nome e Cognome</label>
+          <input type="text" class="form-control" id="firstName" [(ngModel)]="userData.fullName">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="lastName">Numero di Telefono</label>
+          <input type="tel" class="form-control" id="lastName" [(ngModel)]="userData.phoneNumber">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label>Data di Nascita</label>
+          <my-date-picker  [options]="myDatePickerOptions" [(ngModel)]="userData.birthDate">></my-date-picker>
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+          <label for="birthPlace">Luogo di Nascita</label>
+          <input type="text" class="form-control" id="birthPlace" [(ngModel)]="userData.birthPlace">
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+          <label for="livePlace">Residenza</label>
+          <input type="text" class="form-control" id="livePlace" [(ngModel)]="userData.livePlace">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="liveAddress">Indirizzo</label>
+          <input type="text" class="form-control" id="liveAddress" [(ngModel)]="userData.liveAddress">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="docType">Tipo Documento</label>
+          <select id="docType" class="form-control" [(ngModel)]="userData.docType">
+            <option *ngFor="let d of docTypes" [value]="d">{{d}}</option>
+          </select>
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+          <label for="docNumber">Numero Documento</label>
+          <input type="text" class="form-control" id="docNumber" [(ngModel)]="userData.docNumber">
+        </div>
+      </div>
+
+      <hr class="mb-4">
+
+      <h4 class="mb-3">Motivazione dello Spostamento</h4>
+      <div class="row">
+        <p class="ml-3">Lo spostamento è determinato da:</p>
+
+          <div class="col-12 d-block mb-3">
+            <div class=" " *ngFor="let r of reasons; let i = index">
+              <input name="reason" type="radio" value="{{r}}" id="reason{{i}}" [(ngModel)]="userData.reason">
+              <label for="reason{{i}}" class="ml-3">{{r}}</label>
+            </div>
+          </div>
+
+        <div class="col-12 mb-3">
+          <label for="statement">A questo riguardo, dichiara che</label>
+          <textarea rows="3" class="form-control" id="statement" [(ngModel)]="userData.statement"></textarea>
+        </div>
+      </div>
+
+      <hr class="mb-4">
+
+      <div class="form-check mb-4">
+        <input type="checkbox" class="form-check-input" id="saveStorage" [(ngModel)]="saveToStorage">
+        <label class="form-check-label" for="saveStorage">Salva i dati nel browser per la prossima volta</label>
+      </div>
+
+      <button class="btn btn-primary btn-lg btn-block" (click)="generate()">Genera la mia autodichiarazione!</button>
+
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2020 <a target="_blank" href="https://www.linkedin.com/in/roberto-vannucci-4b4429111/">Roberto Vannucci</a></p>
+  </footer>
+</div>
