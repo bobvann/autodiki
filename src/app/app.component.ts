@@ -121,7 +121,9 @@ export class AppComponent implements OnInit {
 
     y += 10;
 
-    doc.text(15, y, `A questo proposito dichiara che:\n${this.userData.statement}` );
+    const statementText = doc.splitTextToSize(`A questo proposito dichiara che:\n${this.userData.statement}`, 180);
+
+    doc.text(15, y, statementText);
 
 
     doc.text(15, 250, 'Data e ora del controllo');
