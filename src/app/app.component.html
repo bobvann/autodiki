@@ -85,8 +85,12 @@
         <input type="checkbox" class="form-check-input" id="saveStorage" [(ngModel)]="saveToStorage">
         <label class="form-check-label" for="saveStorage">Salva i dati nel browser per la prossima volta</label>
       </div>
+      <div class="alert alert-warning text-center">
+        <b>Attenzione!</b> È necessario stampare e firmare il modulo!
+      </div>
 
       <button class="btn btn-primary btn-lg btn-block" (click)="generate()">Genera la mia autodichiarazione!</button>
+
 
       <p class="mt-2 w-100 text-center">I dati inseriti non vengono memorizzati ne trasmessi ad alcuno.<br/>
         Ogni dato inserito resta esclusivamente sul vostro dispositivo e il documento PDF viene generato dal dispositivo stesso.</p>
