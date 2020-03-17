@@ -70,6 +70,8 @@ export class AppComponent implements OnInit {
 
   generate() {
 
+    const ROW_WIDTH = 190;
+
     if (!this.validate()) {
       return;
     }
@@ -84,30 +86,40 @@ export class AppComponent implements OnInit {
 
     const firstText = `Il sottoscritto ${this.userData.fullName},
     nato il ${this.userData.birthDate.formatted} a ${this.userData.birthPlace},
-    residente in ${this.userData.livePlace}, via ${this.userData.liveAddress},
+    residente in ${this.userData.livePlace}, ${this.userData.liveAddress},
     identificato a mezzo ${this.userData.docType} nr. ${this.userData.docNumber}
     utenza telefonica ${this.userData.phoneNumber}, consapevole delle conseguenze penali
     previste in caso di dichiarazioni mendaci a pubblico ufficiale (art 495 c.p.)`
       .replace(/\n/g, '').replace(/ {2}/g, ' ');
 
 
-    const secondText = `> Di essere a conoscenza delle misure di contenimento del contagio di cui all’art. 1,
-    comma 1, del Decreto del Presidente del Consiglio dei Ministri del 9 marzo 2020
-    concernenti lo spostamento delle persone fisiche all’interno di tutto il territorio
-    nazionale, nonché delle sanzioni previste dall’art. 4, comma 1, del Decreto del
-    Presidente del Consiglio dei Ministri dell’ 8 marzo 2020 in caso di
-    inottemperanza (art. 650 C.P. salvo che il fatto non costituisca più grave reato); `
-      .replace(/\n/g, '').replace(/ {2}/g, ' ');
+    const secondTexts = [
+      `> di essere a conoscenza delle misure di contenimento del contagio
+      di cui al combinato disposto dell'art. 1 del Decreto del Presidente del Consiglio dei
+      Ministri 8 marzo 2020 e dell'art. 1, comma 1, del Decreto del Presidente del Consiglio
+      dei Ministri del 9 marzo 2020 concernenti lo spostamento delle persone fisiche
+      all'interno di tutto il territorio nazionale;`,
+      `> di non essere sottoposto alla misura della quarantena e di non essere
+      risultato positivo al virus COVID-19 di cui all'articolo 1, comma 1, lettera c),
+      del Decreto del Presidente del Consiglio dei Ministri dell' 8 marzo 2020;`,
+      `> di essere a conoscenza delle sanzioni previste, dal combinato disposto
+      dell'art. 3, comma 4, del D.L. 23 febbraio 2020, n. 6 e dell'art. 4, comma
+      2, del Decreto del Presidente del Consiglio dei Ministri dell' 8 marzo 2020
+      in caso di inottemperanza delle predette misure di contenimento
+      (art. 650 c.p. salvo che il fatto non costituisca piu\` grave reato);`
+    ];
 
-    doc.text(15, 40, doc.splitTextToSize(firstText, 180));
+    const secondText = secondTexts.map(x => x.replace(/\n/g, '').replace(/ {2}/g, ' ')).join('\n')
 
-    doc.text(38, 90, 'DICHIARA SOTTO LA PROPRIA RESPONSABILITÀ');
+    doc.text(10, 15, doc.splitTextToSize(firstText, ROW_WIDTH));
 
-    doc.text(15, 110, doc.splitTextToSize(secondText, 180));
+    doc.text(38, 60, 'DICHIARA SOTTO LA PROPRIA RESPONSABILITÀ');
+
+    doc.text(10, 80, doc.splitTextToSize(secondText, ROW_WIDTH));
 
 
-    doc.text(15, 160, '> Che lo spostamento è determinato da: ');
-    let y = 170;
+    doc.text(10, 170, '> Che lo spostamento è determinato da: ');
+    let y = 180;
 
     this.reasons.forEach(r => {
       if (r === this.userData.reason) {
@@ -126,9 +138,9 @@ export class AppComponent implements OnInit {
     doc.text(15, y, statementText);
 
 
-    doc.text(15, 250, 'Data e ora del controllo');
-    doc.text(15, 270, 'Firma del dichiarante');
-    doc.text(100, 270, 'L\'Operatore di Polizia');
+    doc.text(15, 260, 'Data e ora del controllo');
+    doc.text(15, 280, 'Firma del dichiarante');
+    doc.text(100, 280, 'L\'Operatore di Polizia');
 
     doc.save('Autodichiarazione.pdf');
 
