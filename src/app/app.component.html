@@ -6,7 +6,7 @@
       Compila i campi seguenti per generare la tua autodichiarazione per poter circolare!
     </p>
     <div class="alert alert-info">
-      <b>Attenzione!</b> Abbiamo aggiornato il modello all'<a href="https://www.interno.gov.it/it/notizie/nuovo-modello-autodichiarazioni" target="_blank">ultima versione</a> rilasciata dal Ministero dell'Interno il 17 marzo!
+      <b>Attenzione!</b> Abbiamo aggiornato il modello all'<a href="https://www.interno.gov.it/it/notizie/aggiornato-modello-autodichiarazioni" target="_blank">ultima versione</a> rilasciata dal Ministero dell'Interno il 23 marzo!
     </div>
   </div>
 
@@ -62,6 +62,25 @@
 
       <hr class="mb-4">
 
+      <h4 class="mb-3">Origine e destinazione</h4>
+      <div class="row">
+
+        <div class="col-12 mb-3">
+          <label for="liveAddress">Indirizzo da cui è iniziato lo spostamento</label>
+          <input type="text" class="form-control" id="addressStart" [(ngModel)]="userData.addressStart">
+        </div>
+
+        <div class="col-12 mb-3">
+          <label for="liveAddress">Indirizzo di destinazione dello spostamento</label>
+          <input type="text" class="form-control" id="addressEnd" [(ngModel)]="userData.addressEnd">
+        </div>
+
+
+
+      </div>
+
+      <hr class="mb-4">
+
       <h4 class="mb-3">Motivazione dello Spostamento</h4>
       <div class="row">
         <p class="ml-3">Lo spostamento è determinato da:</p>
@@ -69,7 +88,7 @@
           <div class="col-12 d-block mb-3">
             <div class=" " *ngFor="let r of reasons; let i = index">
               <input name="reason" type="radio" value="{{r}}" id="reason{{i}}" [(ngModel)]="userData.reason">
-              <label for="reason{{i}}" class="ml-3">{{r}}</label>
+              <label for="reason{{i}}" class="ml-3" [innerHTML]="r.replace('\n','<br/>')"></label>
             </div>
           </div>
 
@@ -99,6 +118,10 @@
   </div>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2020 <a target="_blank" href="https://www.linkedin.com/in/roberto-vannucci-4b4429111/">Roberto Vannucci</a></p>
+    <p class="mb-1">&copy; 2020 <a target="_blank" href="https://www.linkedin.com/in/roberto-vannucci-4b4429111/">Roberto Vannucci</a>
+      &nbsp;-&nbsp;
+      <a target="_blank" href="https://github.com/bobvann/autodiki">Source Code</a>
+    </p>
+
   </footer>
 </div>
